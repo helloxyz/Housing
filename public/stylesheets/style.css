@@ -1,6 +1,13 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: #CCC;
+    padding-top: 40px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    line-height: 20px;
+    color: #2c3e50;
+}
+
+.container {
+	max-width: 950px;
 }
 
 a {
@@ -9,4 +16,36 @@ a {
 
 #summernote {
 	color: #002222;
+}
+
+/* login panel */
+.login_panel {
+	background-color: #f6f8fa;
+	padding-top: 20px;
+}
+.login_panel_left {
+	float: left;
+	line-height: 34px;
+}
+.login_panel_left h3 {
+	font-size: 16px;
+	float: left;
+	padding-right: 15px;
+}
+.login_panel_left a {
+	float: left;
+	width: 140px;
+	background-color: #d53;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+}
+.login_panel_right .login_form .checkbox {
+	margin-right: 20px;
+}
+.login_panel_right .login_form a {
+	vertical-align: baseline;
+}
+.login_panel .login_input_submit {
+	width: 120px;
 }
