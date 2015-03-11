@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  table.table.table-striped.table-hover
+    tbody
+      tr
+        each val, index in #{posts}
+          td = val

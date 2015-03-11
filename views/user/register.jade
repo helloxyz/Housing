@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= 用户注册
+  form(method='post')
+    input(type='text', name='user[username]')
+    input(type='password', name='user[password]')
+    input(type='text', name='user[email]')
+    input(type='submit', name='submit', value='注册')
