@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = require('../models/user');
+var Post = require('../models/post');
 
 module.exports = function(app) {
 	/* Get Home Page. */
@@ -9,7 +10,13 @@ module.exports = function(app) {
   		});
   	});*/
   app.get('/', function(req, res) {
-    res.render('index', {});
+    Post.findAll(function(err, posts) {
+      if(posts) {
+        res.render('index', {posts: posts});
+      } else {
+        res.render('index', {});
+      }
+    });
   });
 
   app.get('/:username', function (req, res) {

@@ -24,6 +24,10 @@ postDetailSchema.pre('save', function(next, done){
   next(); 
 });
 
+postDetailSchema.statics.findAll = function(cb) {
+	this.find({}, cb);
+}
+
 postDetailSchema.statics.findOneByID = function(id, cb) {
     this.findOne({id:id}, cb);
 }

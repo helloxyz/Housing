@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  //table.table.table-striped.table-hover
+  table.table.table-striped.table-hover
     tbody
-      tr
-      	- if(!posts)
-          each val, index in #{posts}
-            td = val
+      each item in posts
+        tr
+          td #{item.title}
+          td #{item.content}
