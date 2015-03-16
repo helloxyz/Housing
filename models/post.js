@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var dateFormat = require('dateformat');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
+var User = require('../models/user');         //JFT
 
 var postArchiveSchema = new Schema({
 	archiveName: {type: String},
@@ -15,17 +16,25 @@ var postDetailSchema = new Schema({
 	slug: {type: String},
 	content: {type: String},
 	content_html: {type: String},
-	Created: {type: Date, default: Date.now},
+	created_at: {type: Date},
+	updated_at: {type: Date},
 	tags: {type: String},
-	refArchive: {type: ObjectId, ref:'postArchive'}
+	refArchive: {type: ObjectId, ref:'postArchive'},
+	postedBy: {type: ObjectId, ref:'user'}
 });
 
 postDetailSchema.pre('save', function(next, done){ 
-  next(); 
+  now = new Date();
+  this.updated_at = now;
+  if ( !this.created_at ) {
+    this.created_at = now;
+  }
+  next();
 });
 
 postDetailSchema.statics.findAll = function(cb) {
-	this.find({}, cb);
+	this.find({}, cb)
+	    .populate('postedBy');
 }
 
 postDetailSchema.statics.findOneByID = function(id, cb) {
@@ -38,7 +47,18 @@ postDetailSchema.statics.updatePost = function(doc, cb) {
 		  var now = new Date();
 		  var date = dateFormat(now, "yyyymmddhhMMss");
 	      doc.id = date + count;
-		  mongoose.model('post').update({id:doc.id}, {$set : doc}, {upsert: true}, cb);
+	      doc.tag = '1111111';
+	      User.findByUserName('123', function(err, user) {
+	      	doc.postedBy = user._id;
+	      });
+	      var aa = new postDetailSchema(doc);
+	      aa.save(cb);
+	      /*mongoose.model('post').save(function (err, doc, numberAffected) {
+	      	if(err) {
+	      		console.log(err);
+	      	}
+	      });*/
+		  //this.update({id:doc.id}, {$set : doc}, {upsert: true}, cb);
 		});
 	} else {
 		this.update({id:doc.id}, {$set : doc}, {upsert: true}, cb);

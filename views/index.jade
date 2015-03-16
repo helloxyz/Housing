@@ -1,9 +1,18 @@
 extends layout
 
 block content
-  table.table.table-striped.table-hover
-    tbody
-      each item in posts
-        tr
-          td #{item.title}
-          td #{item.content}
+  #post_list
+  script.
+    $.getJSON( "api/posts", function( data ) {
+      var items = [];
+      $.each( data, function( key, val ) {
+      	items.push("<tr><td><a href='/post/" + val.id + "'>" + val.title + "</a></td><td><span class='timeago' title='" + val.Created + "'></span></td></tr>")
+      });
+ 
+      $( "<table/>", {
+        "class": "my-new-list",
+        html: items.join( "" )
+      }).appendTo( "#post_list" );
+      jQuery("span.timeago").timeago();
+    });
+    

@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Post = require('../models/post');
-var PostModel = mongoose.model('post');
 
 module.exports = function(app) {
 	app.get('/post/new', function(req, res) {
