@@ -1,0 +1,44 @@
+nav.navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#avbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand 美居网
+        .collapse.navbar-collapse#navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            - if(user)
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false') #{user.username}
+                  span.caret
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='/user/logout') 退出
+            - else
+              li
+                a(href="/user/login") 注册
+              li
+                a(href="/user/register") 登录
+    if(user)
+      .login_panel
+        .container
+          .login_panel_left.col-lg-8
+            h3 在这里，找到你的家
+            a(href='/user/reg', target='_self') 马上注册
+          .login_panel_right.col-lg-4
+            form.login_form.form-horizontal
+              fieldset
+                .form-group
+                  input.login_input_username.form-control(placeholder='用户名', type='text' name='user.username')
+                .form-group
+                  input.login_input_password.form-control(placeholder='密码', type='password' name='user.password')
+                .form-group
+                  .checkbox
+                    label
+                      input(type='checkbox' name='user.remeber')
+                      记住我
+                    a.forget(href='/user/findpwd') 忘记密码
+                .form-group
+                  button.login_input_submit.btn.btn-primary(type='submit') 登录
